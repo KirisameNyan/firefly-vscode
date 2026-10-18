@@ -1,0 +1,59 @@
+{
+  "name": "firefly-vscode",
+  "displayName": "Firefly",
+  "description": "Firefly 博客的 frontmatter 补全、悬停文档、校验与公告编辑",
+  "version": "0.1.0",
+  "publisher": "KirisameNyan",
+  "license": "MIT",
+  "engines": { "vscode": "^1.90.0" },
+  "categories": ["Programming Languages", "Linters", "Other"],
+  "keywords": ["firefly", "astro", "frontmatter", "blog"],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "workspaceContains:src/content/posts",
+    "onLanguage:markdown"
+  ],
+  "contributes": {
+    "commands": [
+      { "command": "firefly.newPost", "title": "Firefly: 新建文章" },
+      { "command": "firefly.openAnnouncement", "title": "Firefly: 打开公告配置" },
+      { "command": "firefly.validateAll", "title": "Firefly: 校验全部文章" }
+    ],
+    "menus": {
+      "commandPalette": [
+        { "command": "firefly.newPost", "when": "workspaceFolderCount > 0" },
+        { "command": "firefly.openAnnouncement", "when": "workspaceFolderCount > 0" },
+        { "command": "firefly.validateAll", "when": "workspaceFolderCount > 0" }
+      ]
+    },
+    "configuration": {
+      "title": "Firefly",
+      "properties": {
+        "firefly.postsDir": {
+          "type": "string",
+          "default": "src/content/posts",
+          "description": "文章目录（相对于工作区根）"
+        },
+        "firefly.announcementFile": {
+          "type": "string",
+          "default": "src/config/announcementConfig.ts",
+          "description": "公告配置文件路径"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/bundle.mjs",
+    "watch": "tsc -p tsconfig.json --watch",
+    "test": "vitest run",
+    "package": "pnpm build && vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/vscode": "~1.90.0",
+    "@vscode/vsce": "^3.2.1",
+    "esbuild": "^0.24.2",
+    "typescript": "5.9.3",
+    "vitest": "^2.1.8"
+  }
+}

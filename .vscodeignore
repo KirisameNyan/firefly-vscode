@@ -1,0 +1,10 @@
+src/**
+test/**
+scripts/**
+out/**
+node_modules/**
+pnpm-lock.yaml
+tsconfig.json
+vitest.config.mts
+.gitignore
+*.vsix
