@@ -1,6 +1,6 @@
 # Firefly (VS Code 扩展)
 
-给 [Firefly](https://github.com/CuteLeaf/Firefly) 博客的 **frontmatter 语言支持** —— 没有面板、没有侧边栏，全部在编辑器里完成，风格对标 *HTML CSS Support*。
+给 [Firefly](https://github.com/CuteLeaf/Firefly) 博客的 **frontmatter 语言支持** —— 没有面板、没有侧边栏，全部在编辑器里完成。
 
 ## 它做什么
 
