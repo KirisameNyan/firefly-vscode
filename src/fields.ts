@@ -22,6 +22,8 @@ export interface FieldDef {
   group: FieldGroup;
   doc: string;
   example?: string;
+  /** 时间字段的期望格式；省略时按 type 推断 */
+  format?: "date" | "datetime";
 }
 
 export const POST_FIELDS: readonly FieldDef[] = [
@@ -100,3 +102,25 @@ export const ANNOUNCE_FIELDS: readonly FieldDef[] = [
 export const ANNOUNCE_FIELD_MAP: ReadonlyMap<string, FieldDef> = new Map(
   ANNOUNCE_FIELDS.map((f) => [f.key, f]),
 );
+
+// ─── 动态（src/content/dynamic）──────────────────────────────
+// 一条动态 = 一个 markdown 文件，frontmatter 只有 3 个字段；
+// 正文就是动态内容。官方文档：/zh/guide/dynamic
+export const DYNAMIC_FIELDS: readonly FieldDef[] = [
+  { key: "published", label: "发布时间", type: "date", required: true, group: "基本",
+    format: "datetime",
+    doc: "发布时间，按字面值显示。格式 YYYY-MM-DD HH:mm:ss（也接受 YYYY-MM-DD）。后面的时区标识由 siteConfig.timezone 计算。",
+    example: "2026-07-15 16:15:29" },
+  { key: "location", label: "位置", type: "string", required: false, group: "基本",
+    doc: "位置，显示在发布时间旁。", example: "广西" },
+  { key: "pinned", label: "置顶", type: "boolean", required: false, group: "基本",
+    doc: "true 时这条动态置顶显示。", example: "true" },
+];
+
+export const DYNAMIC_FIELD_MAP: ReadonlyMap<string, FieldDef> = new Map(
+  DYNAMIC_FIELDS.map((f) => [f.key, f]),
+);
+
+/** 动态文件名约定：YYYY-MM-DD-HHmmss.md */
+export const DYNAMIC_FILE_RE = /^(\d{4})-(\d{2})-(\d{2})-(\d{2})(\d{2})(\d{2})\.md$/;
+

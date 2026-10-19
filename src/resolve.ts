@@ -4,6 +4,7 @@ import * as path from "node:path";
 import * as vscode from "vscode";
 
 const DEFAULT_POSTS_DIR = "src/content/posts";
+const DEFAULT_DYNAMIC_DIR = "src/content/dynamic";
 const DEFAULT_ANNOUNCEMENT_FILE = "src/config/announcementConfig.ts";
 
 export function workspaceRoot(): string | null {
@@ -24,6 +25,10 @@ export function resolveWorkspacePath(relative: string): string | null {
 
 export function resolvePostsDir(): string | null {
   return resolveWorkspacePath(setting("postsDir", DEFAULT_POSTS_DIR));
+}
+
+export function resolveDynamicDir(): string | null {
+  return resolveWorkspacePath(setting("dynamicDir", DEFAULT_DYNAMIC_DIR));
 }
 
 export function resolveAnnouncementPath(): string | null {
